@@ -18,6 +18,8 @@ void initialize() {
 	pros::Vision vision_sensor (VISION_PORT);
   vision_sensor.clear_led();										// clear the reporting LED state
 	vision_sensor.set_wifi_mode(0);								// disable WiFi on sensor - defualt behavior!
+																								// if connected to vision sensor via WiFi
+																								// the V5 brain can not communicate with it!
 }
 
 /**
