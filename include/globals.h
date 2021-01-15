@@ -17,6 +17,7 @@ extern pros::Rotation rotation_sensor;
 
 // ---------- Define Vision Sensor ----------------------------------------
 extern pros::Vision vision_sensor;
+extern pros::Vision vision_camera;
 
 // ------------ Global accessible functions -------------------------------
 extern void robotDataLogger();

@@ -40,10 +40,11 @@
 #define OPTICAL_PORT 12
 
 // ----------- Radio and Controllers ---------------
-#define VEX_RADIO 21
+//#define VEX_RADIO 21
 
 // ------------ Vision Sensors ---------------------
 #define VISION_PORT 14
+#define VISION_CAMERA 21
 
 // ----------- LEGACY port assignments ------------
 #define BUTTON_SWITCH_PORT 1

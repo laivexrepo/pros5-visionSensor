@@ -24,6 +24,7 @@ pros::Rotation rotation_sensor(ROTATION_PORT);
 
 // ----------------- VISION SENSOR -------------------------------------------
 pros::Vision vision_sensor(VISION_PORT);
+pros::Vision vision_camera(VISION_CAMERA);
 
 // --------------------- Global Function definitions ---------------------------
 

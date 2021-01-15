@@ -20,6 +20,9 @@ void initialize() {
 	vision_sensor.set_wifi_mode(0);								// disable WiFi on sensor - defualt behavior!
 																								// if connected to vision sensor via WiFi
 																								// the V5 brain can not communicate with it!
+	pros::Vision vision_camera (VISION_CAMERA);
+	vision_camera.clear_led();										// clear the reporting LED state
+	vision_camera.set_wifi_mode(1);
 }
 
 /**
@@ -69,6 +72,10 @@ void autonomous() {}
 void opcontrol() {
 	std::cout << "Entering OPCONTROL prior to signature initialization \n";
 
+  bool detectBottle = false;						// If set to true, run detect bootle code otherwsie
+																			// run the cube detection code
+																			
+
 	// Create the signatures used by vision sensor to detect objects.  We created these
 	// signatures, using the Vision Utility - these now need to be loaded back into the
 	// vision sensor on program start
@@ -88,36 +95,42 @@ void opcontrol() {
 
 
 	while (true) {
-		pros::vision_object_s_t rtn_red = vision_sensor.get_by_sig(0, RED_SIGNATURE);
-    // Gets the largest object of the EXAMPLE_SIG signature
-    std::cout << "sig: " << rtn_red.signature << " RED ";
+		if(detectBottle) {
+			// run bottle code
 
-		pros::vision_object_s_t rtn_green = vision_sensor.get_by_sig(0, GREEN_SIGNATURE);
-    // Gets the largest object of the EXAMPLE_SIG signature
-    std::cout << "sig: " << rtn_green.signature << " GREEN ";
 
-		pros::vision_object_s_t rtn_blue = vision_sensor.get_by_sig(0, BLUE_SIGNATURE);
-    // Gets the largest object of the EXAMPLE_SIG signature
-    std::cout << "sig: " << rtn_blue.signature << " BLUE \n";
+    } else {
+		  // Run none bottle code
+			pros::vision_object_s_t rtn_red = vision_sensor.get_by_sig(0, RED_SIGNATURE);
+    	// Gets the largest object of the EXAMPLE_SIG signature
+    	std::cout << "sig: " << rtn_red.signature << " RED ";
 
-    // print the coordinates of the detected RED object
-		std::cout << "RED -- Left: " << rtn_red.left_coord << " Top: " << rtn_red.top_coord;
-		std::cout << " Width: " << rtn_red.width << " Height: " << rtn_red.height;
-		std::cout << " x_middle: " << rtn_red.x_middle_coord;
-		std::cout << " y_middle: " << rtn_red.y_middle_coord << " \n";
+			pros::vision_object_s_t rtn_green = vision_sensor.get_by_sig(0, GREEN_SIGNATURE);
+    	// Gets the largest object of the EXAMPLE_SIG signature
+    	std::cout << "sig: " << rtn_green.signature << " GREEN ";
 
-		// print the coordinates of the detected GREEN object
-		std::cout << "GREEN -- Left: " << rtn_green.left_coord << " Top: " << rtn_green.top_coord;
-		std::cout << " Width: " << rtn_green.width << " Height: " << rtn_green.height;
-		std::cout << " x_middle: " << rtn_green.x_middle_coord;
-		std::cout << " y_middle: " << rtn_green.y_middle_coord << " \n";
+			pros::vision_object_s_t rtn_blue = vision_sensor.get_by_sig(0, BLUE_SIGNATURE);
+    	// Gets the largest object of the EXAMPLE_SIG signature
+    	std::cout << "sig: " << rtn_blue.signature << " BLUE \n";
 
-		// print the coordinates of the detected BLUE object
-		std::cout << "BLUE -- Left: " << rtn_blue.left_coord << " Top: " << rtn_blue.top_coord;
-		std::cout << " Width: " << rtn_blue.width << " Height: " << rtn_blue.height;
-		std::cout << " x_middle: " << rtn_blue.x_middle_coord;
-		std::cout << " y_middle: " << rtn_blue.y_middle_coord << " \n";
+    	// print the coordinates of the detected RED object
+			std::cout << "RED -- Left: " << rtn_red.left_coord << " Top: " << rtn_red.top_coord;
+			std::cout << " Width: " << rtn_red.width << " Height: " << rtn_red.height;
+			std::cout << " x_middle: " << rtn_red.x_middle_coord;
+			std::cout << " y_middle: " << rtn_red.y_middle_coord << " \n";
 
+			// print the coordinates of the detected GREEN object
+			std::cout << "GREEN -- Left: " << rtn_green.left_coord << " Top: " << rtn_green.top_coord;
+			std::cout << " Width: " << rtn_green.width << " Height: " << rtn_green.height;
+			std::cout << " x_middle: " << rtn_green.x_middle_coord;
+			std::cout << " y_middle: " << rtn_green.y_middle_coord << " \n";
+
+			// print the coordinates of the detected BLUE object
+			std::cout << "BLUE -- Left: " << rtn_blue.left_coord << " Top: " << rtn_blue.top_coord;
+			std::cout << " Width: " << rtn_blue.width << " Height: " << rtn_blue.height;
+			std::cout << " x_middle: " << rtn_blue.x_middle_coord;
+			std::cout << " y_middle: " << rtn_blue.y_middle_coord << " \n";
+    }
     // Prints "sig: 1"
 		pros::delay(200);
 	}
